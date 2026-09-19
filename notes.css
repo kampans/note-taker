@@ -1,0 +1,449 @@
+/* ==========================================================
+   Notebook — styles
+   Colours live in one place so you can retheme the whole app
+   by editing the values below.
+   ========================================================== */
+
+:root {
+  --paper:     #e6e9e0;   /* page background, like a desk blotter */
+  --card:      #ffffff;   /* the notes themselves */
+  --ink:       #1f252b;   /* main text */
+  --ink-soft:  #626c74;   /* secondary text */
+  --rule:      #cfd4c8;   /* hairlines and borders */
+  --rule-soft: #e4e7dd;
+  --focus:     #2f4d6e;
+  --danger:    #8c2f28;
+
+  --radius: 3px;
+  --rail-width: 200px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Top bar ---------------------------------------------------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.wordmark {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search {
+  font: inherit;
+  color: inherit;
+  width: 230px;
+  max-width: 45vw;
+  padding: 8px 12px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+
+.search::placeholder { color: var(--ink-soft); }
+
+/* ---------- Buttons ---------------------------------------------------- */
+
+.btn {
+  font: inherit;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: #f6f7f3;
+}
+.btn-primary:hover { background: #333b43; }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: var(--rule);
+}
+.btn-quiet:hover { color: var(--ink); background: #00000008; }
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: transparent;
+  padding-left: 0;
+}
+.btn-danger:hover { text-decoration: underline; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Layout ----------------------------------------------------- */
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  min-height: 0;
+}
+
+/* ---------- Left rail: class dividers ---------------------------------- */
+
+.rail {
+  border-right: 1px solid var(--rule);
+  padding: 20px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.class-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each class gets a coloured edge — the tab sticking out of a binder */
+.class-tab {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  background: transparent;
+  border: 0;
+  border-left: 4px solid transparent;
+  padding: 7px 16px 7px 20px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.class-tab:hover { color: var(--ink); }
+
+.class-tab[aria-current="true"] {
+  color: var(--ink);
+  font-weight: 600;
+  background: var(--card);
+  border-left-color: var(--tab-color, var(--ink));
+}
+
+.class-tab .tally {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.rail-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.rail-footer .btn { font-size: 13px; padding: 6px 10px; }
+
+.autosave {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.autosave-status {
+  margin: 0;
+  padding: 0 10px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.autosave-status.is-error {
+  color: var(--danger);
+}
+
+/* ---------- Note list -------------------------------------------------- */
+
+.notes {
+  padding: 20px 24px 60px;
+  overflow-y: auto;
+}
+
+.count {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.note-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 760px;
+}
+
+.note {
+  background: var(--card);
+  border: 1px solid var(--rule-soft);
+  border-left: 4px solid var(--note-color, var(--ink));
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  display: block;
+}
+
+.note:hover { border-color: var(--rule); }
+
+.note-meta {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.note-meta .subject {
+  font-weight: 600;
+  color: var(--note-color, var(--ink));
+}
+
+.note-title {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 19px;
+  font-weight: 500;
+  margin: 0 0 3px;
+  line-height: 1.25;
+}
+
+.note-preview {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- Empty state ------------------------------------------------ */
+
+.empty {
+  max-width: 420px;
+  padding-top: 40px;
+}
+
+.empty-line {
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 22px;
+  margin: 0 0 4px;
+}
+
+.empty-sub {
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+
+/* ---------- Editor dialog ---------------------------------------------- */
+
+.editor {
+  border: 0;
+  padding: 0;
+  background: var(--card);
+  color: var(--ink);
+  width: min(640px, 100%);
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0 0 0 auto;      /* slides against the right edge */
+  border-left: 1px solid var(--rule);
+}
+
+.editor::backdrop {
+  background: rgba(31, 37, 43, 0.35);
+}
+
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  padding: 24px;
+  margin: 0;
+}
+
+.editor-head {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 0;
+}
+
+.field-grow { flex: 1; }
+
+.field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.field .hint {
+  font-weight: 400;
+  color: var(--rule);
+}
+
+.field input,
+.field textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  width: 100%;
+}
+
+.field textarea {
+  flex: 1;
+  resize: none;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 17px;
+  line-height: 1.65;
+  min-height: 200px;
+}
+
+.editor-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--rule-soft);
+  padding-top: 14px;
+}
+
+.editor-foot-right {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- Toast ------------------------------------------------------ */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(12px);
+  margin: 0;
+  padding: 9px 18px;
+  background: var(--ink);
+  color: #f6f7f3;
+  border-radius: var(--radius);
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---------- Small screens ---------------------------------------------- */
+
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 0;
+    flex-direction: column;
+  }
+
+  .class-list {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 0 16px 4px;
+  }
+
+  .class-tab {
+    width: auto;
+    white-space: nowrap;
+    border-left: 0;
+    border-bottom: 3px solid transparent;
+    padding: 5px 4px;
+  }
+
+  .class-tab[aria-current="true"] {
+    background: transparent;
+    border-bottom-color: var(--tab-color, var(--ink));
+  }
+
+  .rail-footer { flex-direction: row; padding: 10px 16px 0; }
+
+  .notes { padding: 16px; }
+
+  .editor-head { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
