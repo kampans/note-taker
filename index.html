@@ -21,6 +21,7 @@
         class="search"
         placeholder="Search notes"
         autocomplete="off">
+      <button type="button" id="aboutBtn" class="btn btn-quiet">About</button>
       <button type="button" id="newNoteBtn" class="btn btn-primary">New note</button>
     </div>
   </header>
@@ -101,6 +102,32 @@
   </dialog>
 
   <p id="toast" class="toast" role="status" aria-live="polite"></p>
+
+  <!-- ===================================================================
+       ABOUT POPUP
+       Edit the heading and paragraphs below to say whatever you want
+       about the site. This content is plain HTML, so you can add more
+       <p> paragraphs, or a <ul><li> list, the same way as anywhere else.
+       =================================================================== -->
+  <dialog id="aboutDialog" class="about-dialog">
+    <div class="about-content">
+      <h2>About this notebook</h2>
+
+      <p>
+        This is a simple notes app built to keep class notes organised by
+        subject and date. All your notes are stored in your browser, so you can use it offline and your data is private. 
+        You can also download a backup of your notes or restore from a backup file.
+        If you want to use it on multiple devices, you can use a cloud storage service like Dropbox or Google Drive to sync the backup file.
+        nikolas.kampans@gmail.com for inquiries or feedback/bugs.
+      </p>
+
+      <p>
+        Built by Nicolas Campan as a personal project. You can find the source code on <a href="https://github.com/kampans/note-taker" target="_blank" rel="noopener noreferrer">GitHub</a>.
+      </p>
+
+      <button type="button" id="aboutCloseBtn" class="btn btn-primary">Close</button>
+    </div>
+  </dialog>
 
   <script src="notes.js"></script>
 </body>

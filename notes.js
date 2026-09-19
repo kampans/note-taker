@@ -47,6 +47,9 @@ const els = {
   deleteBtn:   document.getElementById("deleteBtn"),
   connectFileBtn:   document.getElementById("connectFileBtn"),
   autosaveStatus:   document.getElementById("autosaveStatus"),
+  aboutBtn:      document.getElementById("aboutBtn"),
+  aboutDialog:   document.getElementById("aboutDialog"),
+  aboutCloseBtn: document.getElementById("aboutCloseBtn"),
   exportBtn:   document.getElementById("exportBtn"),
   importBtn:   document.getElementById("importBtn"),
   importInput: document.getElementById("importInput"),
@@ -529,6 +532,14 @@ els.deleteBtn.addEventListener("click", deleteCurrent);
 els.connectFileBtn.addEventListener("click", () => {
   if (needsReconnect) reconnectBackupFile();
   else chooseBackupFile();
+});
+
+els.aboutBtn.addEventListener("click", () => els.aboutDialog.showModal());
+els.aboutCloseBtn.addEventListener("click", () => els.aboutDialog.close());
+
+// Clicking the dimmed backdrop (outside the white box) closes it too.
+els.aboutDialog.addEventListener("click", (e) => {
+  if (e.target === els.aboutDialog) els.aboutDialog.close();
 });
 
 els.exportBtn.addEventListener("click", exportNotes);

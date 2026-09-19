@@ -1,1 +1,1 @@
-My first project :)
+This is a simple notes app built to keep class notes organised by subject and date. All your notes are stored in your browser, so you can use it offline and your data is private. You can also download a backup of your notes or restore from a backup file. If you want to use it on multiple devices, you can use a cloud storage service like Dropbox or Google Drive to sync the backup file. nikolas.kampans@gmail.com for inquiries or feedback/bugs. 
